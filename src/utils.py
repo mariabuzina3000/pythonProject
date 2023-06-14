@@ -1,19 +1,20 @@
 import json
 from datetime import datetime
 
-def data_load():
+def data_load(file_path):
     """
     Функция, загружающая список json
     :return:данные для работы
     """
-    with open('../data.json', 'r', encoding='utf-8') as file:
+
+    with open(file_path, 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data
 
 
 def mask_kard(str_):
     """
-    Функция, определяющая счет это или карта и выводящая результат
+    Функция, определяющая счет это или карта и выводящая результат с замаскированным номером
     :param str_: вход строки с номером
     :return: номер счета или карты
     """
@@ -42,14 +43,13 @@ def filter_sort(data):
     return items[:5]
 
 
-def form_date(items):
+def form_date(data):
     """
     Функция, форматирующая дату
-    :param items: Строка с датой
-    :return: срез с датой
+    :param data: Строка с датой
+    :return: строка с нужным форматом
     """
-    for item in items:
-        new_date = item['date'][:10]
-        new_date_2 = datetime.fromisoformat(new_date)
-        formated_date = new_date_2.strftime('%d.%m.%Y')
-        return formated_date
+    new_date = datetime.fromisoformat(data)
+    formated_date = new_date.strftime('%d.%m.%Y')
+    return formated_date
+
