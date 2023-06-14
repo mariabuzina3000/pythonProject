@@ -7,9 +7,11 @@ def main():
     for operation in sorted_operations:
         new_date = form_date(sorted_operations)
         from_who = mask_kard(operation.get('from'))
-        print(operation)
+        to_who = mask_kard(operation.get('to'))
 
-    print(f'{new_date} {operation["description"]}')
-    print(f'{from_who}')
+
+        print(f'{new_date} {operation["description"]}')
+        print(f'{from_who} -> {to_who}')
+        print(f'{operation["operationAmount"]["amount"]} {operation["operationAmount"]["currency"]["name"]}\n')
 
 main()

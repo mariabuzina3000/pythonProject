@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 def data_load():
     """
@@ -16,15 +17,16 @@ def mask_kard(str_):
     :param str_: вход строки с номером
     :return: номер счета или карты
     """
-    str_list = str_.split(' ')
-    numb = str_list[-1]
-    if len(str_list) > 2:
-        return f"{str_list[0]} {str_list[1]} {numb[:4]} {numb[4:6]}** **** {numb[-4:]}"
-    else:
-        if str_list[0] == 'Счет':
-            return 'Счет ' + '**' + numb[-4:]
-        return f"{str_list[0]} {numb[:4]} {numb[4:6]}** **** {numb[-4:]}"
-
+    if str_ != None:
+        str_list = str_.split(' ')
+        numb = str_list[-1]
+        if len(str_list) > 2:
+            return f"{str_list[0]} {str_list[1]} {numb[:4]} {numb[4:6]}** **** {numb[-4:]}"
+        else:
+            if str_list[0] == 'Счет':
+                return 'Счет ' + '**' + numb[-4:]
+            return f"{str_list[0]} {numb[:4]} {numb[4:6]}** **** {numb[-4:]}"
+    return "None"
 
 def filter_sort(data):
     """
@@ -48,4 +50,6 @@ def form_date(items):
     """
     for item in items:
         new_date = item['date'][:10]
-        return new_date
+        new_date_2 = datetime.fromisoformat(new_date)
+        formated_date = new_date_2.strftime('%d.%m.%Y')
+        return formated_date
